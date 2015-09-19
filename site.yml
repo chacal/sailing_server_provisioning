@@ -20,3 +20,7 @@
 
     - name: Install Node.js
       apt: pkg=nodejs=0.10.* state=installed update_cache=yes
+
+    - name: Install API tools for libgrib
+      apt: pkg=libgrib-api-tools state=installed
+
