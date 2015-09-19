@@ -15,8 +15,13 @@
     - name: Add NodeSource deb repository
       apt_repository: repo='deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main' state=present
 
+    - name: Save installed apt keys
+      shell: apt-key list
+      register: apt_key_list
+
     - name: Import the NodeSource GPG key into apt
       apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+      when: apt_key_list.stdout.find('NodeSource') == -1
 
     - name: Install Node.js
       apt: pkg=nodejs=0.10.* state=installed update_cache=yes
