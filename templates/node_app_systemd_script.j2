@@ -1,0 +1,14 @@
+[Service]
+ExecStart=/usr/bin/node {{ app_path }}/{{ main }}
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier={{ app_name }}
+User={{ app_user if app_user is defined else ansible_ssh_user }}
+Group={{ app_group if app_group is defined else ansible_ssh_user }}
+{% for env in app_env %}
+Environment={{ env }}
+{% endfor %}
+
+[Install]
+WantedBy=multi-user.target

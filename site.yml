@@ -38,3 +38,12 @@
       with_items:
         - git
         - curl
+
+    - include: deploy_node_app.yml
+      vars:
+        app_name: fmiproxy
+        git_repo: https://github.com/chacal/fmiproxy.git
+        main: app.js
+        app_env:
+          - NODE_ENV=production
+          - FMI_API_KEY={{ fmi_api_key }}
