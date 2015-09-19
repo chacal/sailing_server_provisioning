@@ -12,9 +12,6 @@
       apt: pkg=apt-transport-https state=installed update_cache=yes cache_valid_time=86400
       when: not apt_https_transport.stat.exists
 
-    - name: Add NodeSource deb repository
-      apt_repository: repo='deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main' state=present
-
     - name: Save installed apt keys
       shell: apt-key list
       register: apt_key_list
@@ -23,9 +20,8 @@
       apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
       when: apt_key_list.stdout.find('NodeSource') == -1
 
-    - name: Update Apt caches
-      apt: update_cache=yes
-      when: apt_key_list.stdout.find('NodeSource') == -1
+    - name: Add NodeSource deb repository
+      apt_repository: repo='deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main' state=present update_cache=yes
 
     - name: Install Node.js
       apt: pkg=nodejs=0.10.* state=installed update_cache=yes cache_valid_time=86400
