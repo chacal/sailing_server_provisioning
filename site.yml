@@ -15,6 +15,7 @@
     - name: Save installed apt keys
       shell: apt-key list
       register: apt_key_list
+      changed_when: False
 
     - name: Import the NodeSource GPG key into apt
       apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
