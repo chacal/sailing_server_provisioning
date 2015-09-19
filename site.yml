@@ -23,6 +23,10 @@
       apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
       when: apt_key_list.stdout.find('NodeSource') == -1
 
+    - name: Update Apt caches
+      apt: update_cache=yes
+      when: apt_key_list.stdout.find('NodeSource') == -1
+
     - name: Install Node.js
       apt: pkg=nodejs=0.10.* state=installed update_cache=yes cache_valid_time=86400
 
