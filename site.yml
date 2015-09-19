@@ -1,0 +1,7 @@
+---
+- hosts: vagrant
+  sudo: True
+  gather_facts: yes
+
+  tasks:
+    - debug: msg="If you see this, your setup is working correctly!"
