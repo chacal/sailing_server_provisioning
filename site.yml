@@ -27,6 +27,14 @@
     - name: Install Node.js
       apt: pkg=nodejs=0.10.* state=installed update_cache=yes cache_valid_time=86400
 
+    - name: Install npm
+      npm: name=npm global=yes state=present
+
     - name: Install API tools for libgrib
       apt: pkg=libgrib-api-tools state=installed
 
+    - name: Install misc tools
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - git
+        - curl
