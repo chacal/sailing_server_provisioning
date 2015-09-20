@@ -1,8 +1,8 @@
 - name: Setup default variables
-  set_fact: app_path=/opt/{{ app_name }}
+  set_fact: app_path=/opt/{{ app_name }} app_user={{ app_user if app_user is defined else ansible_ssh_user }} app_group={{ app_group if app_group is defined else ansible_ssh_user }}
 
 - name: Make app dir
-  file: path={{ app_path }} state=directory mode=0755 owner=vagrant group=vagrant
+  file: path={{ app_path }} state=directory mode=0755 owner={{ app_user }} group={{ app_group }}
 
 - name: Pull sources from the repository
   sudo: no

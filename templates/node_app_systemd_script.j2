@@ -4,8 +4,8 @@ Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier={{ app_name }}
-User={{ app_user if app_user is defined else ansible_ssh_user }}
-Group={{ app_group if app_group is defined else ansible_ssh_user }}
+User={{ app_user }}
+Group={{ app_group }}
 {% for env in app_env %}
 Environment={{ env }}
 {% endfor %}
