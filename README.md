@@ -26,9 +26,9 @@ Install (or update) to the latest version:
 
 #### Run Ansible playbook
 
-    ansible-playbook -i hosts site.yml -k     # use 'vagrant' as password
+    ansible-playbook -i hosts site.yml -k -e "fmi_api_key=<API_KEY>"    # use 'vagrant' as password
 
 SSH host key checking can be disabled by setting ```ANSIBLE_HOST_KEY_CHECKING``` env variable to ```False```:
 
     export ANSIBLE_HOST_KEY_CHECKING=False
-    ansible-playbook -i hosts site.yml -k     # use 'vagrant' as password
+    ansible-playbook -i hosts site.yml -k -e "fmi_api_key=<API_KEY>"    # use 'vagrant' as password
