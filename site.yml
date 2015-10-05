@@ -47,3 +47,11 @@
         app_env:
           - NODE_ENV=production
           - FMI_API_KEY={{ fmi_api_key }}
+
+    - include: deploy_node_app.yml
+      vars:
+        app_name: weather_app
+        git_repo: https://github.com/chacal/weatherapp.git
+        main: server/app.js
+        app_env:
+          - NODE_ENV=production
