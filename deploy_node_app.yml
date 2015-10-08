@@ -10,7 +10,7 @@
 
 - name: Install npm packages
   sudo: no
-  npm: path={{ app_path }}
+  shell: chdir={{ app_path }} npm install
 
 - name: Install systemd start/stop script
   template: src=templates/node_app_systemd_script.j2 dest=/etc/systemd/system/{{ app_name }}.service owner=root group=root mode=0644
