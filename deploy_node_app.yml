@@ -7,13 +7,16 @@
 - name: Pull sources from the repository
   sudo: no
   git: repo={{ git_repo }} dest={{ app_path }} force=yes version=master
+  register: git_pull
 
 - name: Install npm packages
   sudo: no
   shell: chdir={{ app_path }} npm install
+  when: git_pull.changed
 
 - name: Install systemd start/stop script
   template: src=templates/node_app_systemd_script.j2 dest=/etc/systemd/system/{{ app_name }}.service owner=root group=root mode=0644
 
 - name: (Re)Start service
   service: name={{ app_name }} state=restarted enabled=yes
+  when: git_pull.changed
