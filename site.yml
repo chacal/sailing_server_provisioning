@@ -22,10 +22,10 @@
       when: apt_key_list.stdout.find('NodeSource') == -1
 
     - name: Add NodeSource deb repository
-      apt_repository: repo='deb https://deb.nodesource.com/node_0.10 {{ ansible_distribution_release }} main' state=present update_cache=yes
+      apt_repository: repo='deb https://deb.nodesource.com/node_4.x {{ ansible_distribution_release }} main' state=present update_cache=yes
 
     - name: Install Node.js
-      apt: pkg=nodejs=0.10.* state=installed update_cache=yes cache_valid_time=86400
+      apt: pkg=nodejs=4.* state=installed update_cache=yes cache_valid_time=86400
 
     - name: Install npm
       npm: name=npm global=yes state=present
