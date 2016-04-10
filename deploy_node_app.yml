@@ -16,7 +16,12 @@
 
 - name: Install systemd start/stop script
   template: src=templates/node_app_systemd_script.j2 dest=/etc/systemd/system/{{ app_name }}.service owner=root group=root mode=0644
+  register: systemd_unit_file
+
+- name: Reload systemd unit files
+  command: systemctl daemon-reload
+  when: systemd_unit_file.changed
 
 - name: (Re)Start service
   service: name={{ app_name }} state=restarted enabled=yes
-  when: git_pull.changed
+  when: git_pull.changed or systemd_unit_file.changed
