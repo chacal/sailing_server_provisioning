@@ -3,6 +3,7 @@ ExecStart=/usr/bin/node {{ app_path }}/{{ main }}
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
+WorkingDirectory={{ app_path }}
 SyslogIdentifier={{ app_name }}
 User={{ app_user }}
 Group={{ app_group }}
