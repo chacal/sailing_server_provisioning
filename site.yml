@@ -1,5 +1,5 @@
 ---
-- hosts: vagrant
+- hosts: all
   sudo: True
   gather_facts: yes
 
@@ -55,3 +55,4 @@
         main: server/app.js
         app_env:
           - NODE_ENV=production
+          - PORT=80
